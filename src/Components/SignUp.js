@@ -26,6 +26,11 @@ const SignUp = (props) => {
     }
 
     const onRegisterHandler = (event) => {
+        if (setEnteredName === '' || setEnteredLastName === '' || setEnteredEmail === '' || setEnteredPass === '') {
+            setIsSignedUp(true);
+            return;
+        }
+
         setIsSignedUp(false);
         console.log(enteredName, ' ', enteredLastName, ' ', enteredEmail);
         const newUser = {
