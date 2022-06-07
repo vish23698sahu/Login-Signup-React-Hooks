@@ -1,0 +1,14 @@
+body {
+    background-color: rgb(5, 5, 86);
+    color: rgb(216, 240, 242);
+    text-align: center;
+    width: 100%;
+    overflow: hidden;
+    margin: 0px;
+}
+
+.navbar {
+    background-color: rgb(95, 174, 244);
+    width: 100%;
+    height: auto;
+}
