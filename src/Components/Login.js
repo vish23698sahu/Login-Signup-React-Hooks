@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Home from './Home';
-import './Login.css'
+import './Login.css';
 
 const Login = (props) => {
     const [showHomePage, setShowHomePage] = useState(false);
@@ -49,9 +49,9 @@ const Login = (props) => {
                     <div class="bottom"></div>
                     <div class="center">
                         <h2>Please Log In</h2>
-                        {credentialsMatched && <p>Please enter valid email and password combination</p>}
-                        <input type="email" placeholder="email" onChange={emailChangeHandler} />
-                        <input type="password" placeholder="password" onChange={passChangeHandler} />
+                        {credentialsMatched && <p className='color-it-red'>Please enter valid email and password combination</p>}
+                        <input className='color-black' type="email" placeholder="email" onChange={emailChangeHandler} />
+                        <input className='color-black' type="password" placeholder="password" onChange={passChangeHandler} />
                         <div className='buttons'>
                             <button className='login-btn btn-success' onClick={onLoginClickHandler} >Login</button>
                             <button className='signup-btn btn-success' onClick={props.onSignUp} >SignUp</button>

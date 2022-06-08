@@ -25,3 +25,22 @@
     overflow: hidden;
     padding-top: 60px;
 }
+
+.container .loginfailed input {
+    background-color: rgb(242, 175, 175);
+    border: #e00911;
+}
+
+.signupfailed {
+    background-color: rgb(242, 175, 175);
+    border: #e00911;
+    border-width: 1px;
+}
+
+.color-it-red {
+    color: red;
+}
+
+.color-black {
+    color: black;
+}

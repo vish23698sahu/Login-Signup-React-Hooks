@@ -92,7 +92,7 @@ body {
     opacity: 0;
     transition: all 0.5s cubic-bezier(0.445, 0.05, 0, 1);
     transition-delay: 0s;
-    color: #333;
+    color: rgb(239, 234, 234);
 }
 
 .center input {
@@ -128,8 +128,16 @@ body {
     border: #e00911;
 }
 
-.container .loginfailed {
+.loginfailed {
     background-color: rgb(242, 175, 175);
     border: #e00911;
     border-width: 1px;
+}
+
+.color-it-red {
+    color: red;
+}
+
+.color-black {
+    color: black;
 }
