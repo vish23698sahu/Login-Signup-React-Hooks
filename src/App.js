@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import './App.css';
+import { Fragment, useState } from 'react';
 import Login from './Components/Login';
 import SignUp from './Components/SignUp';
 
@@ -54,10 +53,10 @@ function App() {
   }
 
   return (
-    <div className="App">
+    <Fragment>
       {showLogin && <Login onSignUp={signUpInsideLoginHandler} userLoggedIn={isUserLoggedIn} users={dummyUsers} />}
       {!showLogin && <SignUp userSignedUp={isUserRegistered} onLoginInsideRegister={loginInsideRegister} onUserRegistration={userRegisteredHandler} />}
-    </div>
+    </Fragment>
   );
 }
 
