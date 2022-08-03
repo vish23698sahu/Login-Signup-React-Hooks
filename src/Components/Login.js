@@ -4,52 +4,66 @@ import './Login.css';
 
 const Login = (props) => {
     const [showHomePage, setShowHomePage] = useState(false);
-    const [credentialsMatched, setCredentialsMatched] = useState(false);
+    const [credentialNotMatch, setCredentialNotMatch] = useState(false);
 
     const [enteredEmail, setEnteredEmail] = useState('');
     const [enteredPass, setEnteredPass] = useState('');
 
     const emailChangeHandler = (event) => {
         setEnteredEmail(event.target.value);
-        setCredentialsMatched(false);
+        setCredentialNotMatch(false);
     }
 
     const passChangeHandler = (event) => {
         setEnteredPass(event.target.value);
-        setCredentialsMatched(false);
+        setCredentialNotMatch(false);
     }
 
-    const onLoginClickHandler = (event) => {
-        const emailsInDB = props.users.map(user => user.email);
-        const passInDB = props.users.map(user => user.pass);
-        for (const e of emailsInDB) {
-            if (e === enteredEmail) {
-                console.log(enteredEmail, 'Login succesful');
-                setShowHomePage(true);
-                return;
-            }
-        }
-        for (const p of passInDB) {
-            if (p === enteredPass) {
-                setShowHomePage(true);
-                return;
-            }
-        }
+    const onLoginClickHandler = async (event) => {
+        const response = await fetch('https://login-signup-portfolio-default-rtdb.firebaseio.com/Users.json');
+        const responseData = await response.json();
+        const loadedUsers = [];
 
-        //If credentials r not valid credentials:
-        setShowHomePage(false);
-        setCredentialsMatched(true);
+        for (const i in responseData) {
+            loadedUsers.push({
+                id: i,
+                name: responseData[i].user.name,
+                lastName: responseData[i].user.lastName,
+                email: responseData[i].user.email,
+                password: responseData[i].user.pass
+            });
+        }
+        console.log(loadedUsers, ' user data ');
+
+        for (const em in loadedUsers) {
+            if (enteredEmail === loadedUsers[em].email) {
+                console.log('email authenticated');
+                if (enteredPass === loadedUsers[em].password) {
+                    console.log('User Authenticated');
+                    setShowHomePage(true);
+                    return;
+                }
+                else {
+                    console.log('Invalid password');
+                    setCredentialNotMatch(true);
+                    setShowHomePage(false);
+                }
+            }
+            else {
+                setCredentialNotMatch(true);
+            }
+        }
     };
 
     return (
         <div className="container" >
             {!showHomePage &&
-                <div className={credentialsMatched && 'loginfailed'}>
+                <div className={credentialNotMatch && 'loginfailed'}>
                     <div class="top"></div>
                     <div class="bottom"></div>
                     <div class="center">
                         <h2>Please Log In</h2>
-                        {credentialsMatched && <p className='color-it-red'>Please enter valid email and password combination</p>}
+                        {credentialNotMatch && <p className='color-it-red'>Please enter valid email and password combination</p>}
                         <input className='color-black' type="email" placeholder="email" onChange={emailChangeHandler} />
                         <input className='color-black' type="password" placeholder="password" onChange={passChangeHandler} />
                         <div className='buttons'>

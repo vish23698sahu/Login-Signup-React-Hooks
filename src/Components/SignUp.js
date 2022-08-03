@@ -33,7 +33,10 @@ const SignUp = (props) => {
             return;
         }
 
+        let newId = Math.random();
+
         const newUser = {
+            id: newId,
             name: enteredName,
             lastName: enteredLastName,
             email: enteredEmail,

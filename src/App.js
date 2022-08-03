@@ -46,10 +46,16 @@ function App() {
     setShowLogin(true);
   }
 
-  const userRegisteredHandler = (newUserData) => {
-    setDummyUsers((prevusers) => {
-      return [newUserData, ...prevusers];
-    })
+  const userRegisteredHandler = async (newUserData) => {
+    // setDummyUsers((prevusers) => {
+    //   return [newUserData, ...prevusers];
+    // })
+    await fetch('https://login-signup-portfolio-default-rtdb.firebaseio.com/Users.json', {
+      method: 'POST',
+      body: JSON.stringify({
+        user: newUserData,
+      })
+    });
   }
 
   return (
