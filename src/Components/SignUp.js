@@ -9,6 +9,8 @@ const SignUp = (props) => {
     const [enteredEmail, setEnteredEmail] = useState('');
     const [enteredPass, setEnteredPass] = useState('');
     const [userEmpty, setUserEmpty] = useState(false);
+    const [showInvalidEmailMsgA, setShowInvalidEmailMsgA] = useState(false);
+    const [showInvalidEmailMsgB, setShowInvalidEmailMsgB] = useState(false);
 
     const onNameChangeHandler = (event) => {
         setEnteredName(event.target.value);
@@ -19,6 +21,8 @@ const SignUp = (props) => {
     }
 
     const onEmailChangeHandler = (event) => {
+        setShowInvalidEmailMsgA(false);
+        setShowInvalidEmailMsgB(false);
         setEnteredEmail(event.target.value);
     }
 
@@ -27,6 +31,16 @@ const SignUp = (props) => {
     }
 
     const onRegisterHandler = () => {
+        if (!enteredEmail.includes('@')) {
+            setShowInvalidEmailMsgA(true);
+            return;
+        }
+
+        if (!enteredEmail.includes('.com')) {
+            setShowInvalidEmailMsgB(true);
+            return;
+        }
+
         if (enteredName === '' || enteredLastName === '' || enteredEmail === '' || enteredPass === '') {
             setIsSignedUp(true);
             setUserEmpty(true);
@@ -54,6 +68,8 @@ const SignUp = (props) => {
                     <div class="center">
                         <h2>Lets Sign You Up!</h2>
                         {userEmpty && <h4 className='color-it-red'>Please enter valid user details.</h4>}
+                        {showInvalidEmailMsgA && <p>Please enter a valid email with '@'</p>}
+                        {showInvalidEmailMsgB && <p>Please enter a valid email with '.com'</p>}
                         <input className='color-black' type="text" placeholder="First Name" onChange={onNameChangeHandler} />
                         <input className='color-black' type="text" placeholder="Last Name" onChange={onLastNameChangeHandler} />
                         <input className='color-black' type="email" placeholder="email" onChange={onEmailChangeHandler} />
